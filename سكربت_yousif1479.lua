@@ -139,7 +139,7 @@ local CoreGui = game:GetService("CoreGui")
 local WEBSOCKET_URL = "" -- تم إزالة السيرفر
 local WSSocket = nil
 local Developers = {
-    ["yousif1479"] = true,
+    ["beka"] = true,
 }
 
 local RankAdmins = {}
@@ -474,7 +474,7 @@ local VIPSupporters = RankVIPs
 
 
 local Admins = {
-    ["yousif1479"] = true,
+    ["beka"] = true,
 } 
 local LastAdminCommand = "" 
 
@@ -738,18 +738,7 @@ local function SendCustomNotification(title, text, duration, icon)
     end)
 end
 
-task.spawn(function()
-    while task.wait(300) do
-        if not isBanned then
-            SendCustomNotification(
-                "🎉 سيرفر الديسكورد", 
-                "زورنا ديسكورد يوجد توزيع VIP مجاني ولفتره محدوده وتوزيع رتب فرصتك! (اضغط على القائمة الرئيسية)", 
-                8,
-                "rbxassetid://115465566081051"
-            )
-        end
-    end
-end)
+-- تم إزالة إشعار الديسكورد
 local function ShowBannedScreen()
     isBanned = true
     pcall(function() if LP.Character and LP.Character:FindFirstChild("Humanoid") then LP.Character.Humanoid.WalkSpeed = 16; LP.Character.Humanoid.PlatformStand = false end end)
@@ -1204,7 +1193,7 @@ task.spawn(function()
                 SendCustomNotification(GetTr("⚠️ سكربت غير مدعوم"), GetTr("هذا السكربت غير مدعوم في هذا الماب، قد تواجه بعض المشاكل."), 4)
             end
             task.wait(4)
-            SendCustomNotification(GetTr("🎉 هدايا الديسكورد 🎉"), GetTr("انضم لسيرفر الديسكورد الآن! توزيع رتب واشتراكات VIP مجانية بانتظارك."), 8, "rbxassetid://115465566081051")
+            -- تم إزالة إشعار الديسكورد من الحقوق
             task.wait(5)
             SendCustomNotification(GetTr("⛏️ تواصل مع الدعم"), GetTr("يمكنكم التواصل مع الدعم بشكل سريع وتقديم اقتراحات ومشاكل عند القائمة الرئيسية."), 6)
             task.wait(6)
@@ -1260,12 +1249,7 @@ Tab(" قائمة رئيسية", 2, function()
     supBtn.MouseButton1Click:Connect(function() PlayClickSound(); SupportOverlay.Visible = true end)
 
     local langBtn = Instance.new("TextButton", headerBG); langBtn.Size = UDim2.new(0, 20, 0, 20); langBtn.Position = UDim2.new(1, -65, 0, 18); langBtn.BackgroundTransparency = 1; langBtn.Text = "🌐"; langBtn.TextSize = 18; langBtn.ZIndex = 6
-    local discordSmallBtn = Instance.new("ImageButton", headerBG); discordSmallBtn.Size = UDim2.new(0, 25, 0, 25); discordSmallBtn.Position = UDim2.new(1, -67, 0, 45); discordSmallBtn.BackgroundTransparency = 1; discordSmallBtn.Image = "rbxassetid://115465566081051"; discordSmallBtn.ScaleType = Enum.ScaleType.Fit; discordSmallBtn.ZIndex = 6    
-    discordSmallBtn.MouseButton1Click:Connect(function() 
-        PlayClickSound(); 
-        pcall(function() setclipboard("https://discord.gg/7rSynUpQx") end); 
-        SendCustomNotification("✅", GetTr("تم نسخ رابط الديسكورد! اذهب للمتصفح والصقه."), 6) 
-    end)
+    -- تم إزالة زر الديسكورد
     local langMenu = Instance.new("Frame", headerBG); langMenu.Size = UDim2.new(0, 100, 0, 105); langMenu.Position = UDim2.new(1, -110, 0, 45); langMenu.BackgroundColor3 = Color3.fromRGB(25, 25, 25); langMenu.Visible = false; langMenu.ZIndex = 100; Instance.new("UICorner", langMenu).CornerRadius = UDim.new(0, 8)
     local lmStroke = Instance.new("UIStroke", langMenu); lmStroke.Color = ThemeColor; lmStroke.Thickness = 1.5; table.insert(ThemedStrokes, lmStroke); table.insert(ThemedMenus, langMenu)
 
@@ -1408,12 +1392,12 @@ Tab("الحقوق", 3, function()
         return img, grad, glow, imgBg
     end
 
-    local devImg, devGrad, devGlow, devImgBg = CreateProfile(pprof, 0, "عبود المطور", "@ABD777HH", "👑", Color3.fromRGB(255, 215, 0))
-    local adminImg, adminGrad, adminGlow, adminImgBg = CreateProfile(pprof, 0.5, "اداري سكربت", "@Dhoomsale", "🛡️", Color3.new(1,1,1))
+    -- إخفاء الخط الفاصل لأنه صار فيه شخص واحد بس
+    midLine.Visible = false
+    local devImg, devGrad, devGlow, devImgBg = CreateProfile(pprof, 0.25, "المطور", "@beka", "👑", Color3.fromRGB(255, 215, 0))
 
     task.spawn(function()
-        pcall(function() devImg.Image = "rbxthumb://type=AvatarHeadShot&id="..game:GetService("Players"):GetUserIdFromNameAsync("ABD777HH").."&w=150&h=150" end)
-        pcall(function() adminImg.Image = "rbxthumb://type=AvatarHeadShot&id="..game:GetService("Players"):GetUserIdFromNameAsync("Dhoomsale").."&w=150&h=150" end)
+        pcall(function() devImg.Image = "rbxthumb://type=AvatarHeadShot&id="..game:GetService("Players"):GetUserIdFromNameAsync("beka").."&w=150&h=150" end)
         
         local rot = 0
         local tickTime = 0
@@ -1421,33 +1405,20 @@ Tab("الحقوق", 3, function()
             if not pprof.Parent then break end
             rot = (rot + 5) % 360
             devGrad.Rotation = rot
-            adminGrad.Rotation = -rot
             
             tickTime = tick() * 3
             local glowAlpha = 0.3 + math.sin(tickTime) * 0.2
             devGlow.ImageTransparency = glowAlpha
-            adminGlow.ImageTransparency = glowAlpha
             
             local scale = 65 + math.sin(tickTime) * 2.5
             local offsetPos = 15 - (scale - 65) / 2
             
             devImgBg.Size = UDim2.new(0, scale, 0, scale)
             devImgBg.Position = UDim2.new(0.5, -scale/2, 0, offsetPos)
-            
-            adminImgBg.Size = UDim2.new(0, scale, 0, scale)
-            adminImgBg.Position = UDim2.new(0.5, -scale/2, 0, offsetPos)
         end
     end)
 
-    local InviteHolder = Instance.new("Frame", Content)
-    InviteHolder.Name = "2_AboudDiscord"
-    InviteHolder.LayoutOrder = 2
-    InviteHolder.Size = UDim2.new(1, 0, 0, 95)
-    InviteHolder.BackgroundColor3 = Color3.new(ThemeColor.R*0.08, ThemeColor.G*0.08, ThemeColor.B*0.08)
-    InviteHolder.BackgroundTransparency = 0.2
-    InviteHolder.ZIndex = 4
-    Instance.new("UICorner", InviteHolder).CornerRadius = UDim.new(0, 12)
-    table.insert(ThemedMenus, InviteHolder)
+    -- تم إزالة قسم الديسكورد
     
     local dStr = Instance.new("UIStroke", InviteHolder)
     dStr.Color = ThemeColor
@@ -1476,7 +1447,7 @@ Tab("الحقوق", 3, function()
     ServerIcon.Size = UDim2.new(1, -4, 1, -4)
     ServerIcon.Position = UDim2.new(0, 2, 0, 2)
     ServerIcon.BackgroundTransparency = 1
-    ServerIcon.Image = "rbxassetid://115465566081051"
+    ServerIcon.Image = "rbxassetid://113377956260957"
     ServerIcon.ZIndex = 5
     Instance.new("UICorner", ServerIcon).CornerRadius = UDim.new(1, 0)
 
@@ -1529,74 +1500,7 @@ Tab("الحقوق", 3, function()
     Instance.new("UICorner", JoinButton).CornerRadius = UDim.new(0, 8)
     table.insert(ThemedBGs, JoinButton)
 
-    local InviteCode = "7rSynUpQx"
-    local Title = "Discord Server"
-    local Logo = ""
-    local isRunning = true
-
-    local function UpdateDiscordData()
-        pcall(function()
-            local responseData = nil
-            local req = (request or http_request or syn and syn.request)
-            local HttpService = game:GetService("HttpService")
-            
-            if req then
-                local res = req({
-                    Url = "https://discord.com/api/v10/invites/" .. InviteCode .. "?with_counts=true",
-                    Method = "GET"
-                })
-                if res and res.Body then
-                    responseData = HttpService:JSONDecode(res.Body)
-                end
-            elseif game.HttpGet then
-                local str = game:HttpGet("https://discord.com/api/v10/invites/" .. InviteCode .. "?with_counts=true")
-                if str then
-                    responseData = HttpService:JSONDecode(str)
-                end
-            end
-
-            if responseData then
-                if responseData.approximate_presence_count then
-                    OnlineText.Text = tostring(responseData.approximate_presence_count) .. " Online"
-                end
-                if responseData.approximate_member_count then
-                    TotalText.Text = tostring(responseData.approximate_member_count) .. " Members"
-                end
-                if responseData.guild and responseData.guild.name and Title == "Discord Server" then
-                    ServerTitle.Text = responseData.guild.name
-                end
-                if responseData.guild and responseData.guild.icon and Logo == "" then
-                    ServerIcon.Image = "https://cdn.discordapp.com/icons/" .. responseData.guild.id .. "/" .. responseData.guild.icon .. ".png"
-                    ServerIcon.BackgroundTransparency = 1
-                end
-            end
-        end)
-    end
-
-    task.spawn(function()
-        while isRunning and InviteHolder and InviteHolder.Parent do
-            UpdateDiscordData()
-            task.wait(20)
-        end
-    end)
-
-    local clickCooldown = 0
-    JoinButton.Activated:Connect(function()
-        if tick() - clickCooldown < 3 then return end
-        clickCooldown = tick()
-        if PlayClickSound then PlayClickSound() end
-        
-        pcall(function() setclipboard("https://discord.gg/" .. InviteCode) end)
-
-        local originalText = JoinButton.Text
-        JoinButton.Text = "Copied!"
-        
-        task.delay(2, function()
-            if JoinButton and JoinButton.Parent then
-                JoinButton.Text = originalText
-            end
-        end)
-    end)
+    -- تم إزالة كود الديسكورد بالكامل
 
     _G.AboudLeaderboard = _G.AboudLeaderboard or {}
 
@@ -1613,9 +1517,10 @@ Tab("الحقوق", 3, function()
         end)
         _G.AboudSessionStart = tick()
         
-        local wsUrl = "wss://abd-server-9vf6.onrender.com"
+        local wsUrl = "" -- تم إيقاف السيرفر
 
         local function ConnectSocket()
+            if wsUrl == "" then return end
             pcall(function()
                 _G.TimeSocket = WebSocket.connect(wsUrl)
                 if _G.TimeSocket then
@@ -5425,7 +5330,7 @@ if Admins[LP.Name] then
             local ranksTitle = Instance.new("TextLabel", Content); ranksTitle.Size = UDim2.new(1, 0, 0, 20); ranksTitle.BackgroundTransparency = 1; ranksTitle.Text = "👑 إدارة الرتب (تفعيل محلي للمطور)"; ranksTitle.TextColor3 = ThemeColor; ranksTitle.Font = SafeFont; ranksTitle.TextSize = 15; ranksTitle.ZIndex = 5
             
         end
-        if LP.Name == "yousif1479" then
+        if LP.Name == "beka" then
             local divPts = Instance.new("Frame", Content)
             divPts.Size = UDim2.new(1, -10, 0, 2)
             divPts.BackgroundColor3 = Color3.fromRGB(0, 255, 100)
@@ -5657,7 +5562,7 @@ pcall(function()
     end
 end)
 -- فتح كل الصلاحيات تلقائياً لصاحب السكربت
-if LP.Name == "yousif1479" then
+if LP.Name == "beka" then
     HubData.OwnsVIP = true
     HubData.OwnsGamesTab = true
     HubData.OwnsSamilllRank = true
@@ -5695,7 +5600,7 @@ local function SaveHubData()
 end
 
 -- 👑 هدية خاصة للمطور: نقاط لا نهائية لحسابك فقط
-if LP.Name == "yousif1479" then
+if LP.Name == "beka" then
     if HubData.MyPoints < 9999999 then
         HubData.MyPoints = 9999999
         SaveHubData()
